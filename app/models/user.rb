@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Associations
-  has_many :projects, dependent: :destroy
+  has_many :owned_projects, class_name: 'Project', foreign_key: 'owner_id', dependent: :destroy
+  has_many :project_members, dependent: :destroy
+  has_many :projects, through: :project_members
 end
